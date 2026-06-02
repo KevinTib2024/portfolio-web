@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { technologies } from "../../data/portfolio";
 import { useInView } from "../../hooks/useInView";
 import SectionLabel from "../ui/SectionLabel";
@@ -10,7 +10,6 @@ const categories = [
   { key: "otros", label: "Otros & Cloud", icon: "◇", color: "#EC4899" },
 ];
 
-// Tech Badge con barra de progreso
 const TechBadgeWithLevel = ({ name, level }) => {
   const levelValues = {
     advanced: 100,
@@ -98,9 +97,16 @@ const TechBadgeWithLevel = ({ name, level }) => {
   );
 };
 
-// Category Card Component
 const TechCategory = ({ category, technologies: techs, index, inView }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const frontendKeyTechs = [
+    { name: "TypeScript", level: "intermediate" },
+    { name: "Tailwind", level: "intermediate" },
+  ];
+
+  const isFrontend = category.key === "frontend";
+  const allTechs = isFrontend ? [...techs, ...frontendKeyTechs] : techs;
 
   return (
     <div
@@ -199,7 +205,7 @@ const TechCategory = ({ category, technologies: techs, index, inView }) => {
               letterSpacing: "0.08em",
             }}
           >
-            {techs.length} habilidades
+            {allTechs.length} habilidades
           </p>
         </div>
       </div>
@@ -214,7 +220,7 @@ const TechCategory = ({ category, technologies: techs, index, inView }) => {
           zIndex: 1,
         }}
       >
-        {techs.map((tech, i) => (
+        {allTechs.map((tech, i) => (
           <div
             key={tech.name}
             style={{
@@ -243,8 +249,8 @@ export default function Tech() {
         <div
           ref={ref}
           style={{
-            opacity: inView  ? 1 : 0,
-            transform: inView  ? "none" : "translateY(30px)",
+            opacity: inView ? 1 : 0,
+            transform: inView ? "none" : "translateY(30px)",
             transition: "all 0.7s ease",
           }}
         >
@@ -283,42 +289,21 @@ export default function Tech() {
                 fontSize: "11px",
                 color: "var(--text-3)",
                 flexWrap: "wrap",
-                opacity: inView  ? 1 : 0,
-                transform: inView  ? "none" : "translateY(10px)",
+                opacity: inView ? 1 : 0,
+                transform: inView ? "none" : "translateY(10px)",
                 transition: "all 0.7s ease 0.3s",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "2px",
-                    background: "var(--accent)",
-                  }}
-                />
+                <div style={{ width: 12, height: 12, borderRadius: "2px", background: "var(--accent)" }} />
                 <span>Intermedio (100%)</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "2px",
-                    background: "var(--blue)",
-                  }}
-                />
+                <div style={{ width: 12, height: 12, borderRadius: "2px", background: "var(--blue)" }} />
                 <span>Básico (70%)</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "2px",
-                    background: "var(--text-3)",
-                  }}
-                />
+                <div style={{ width: 12, height: 12, borderRadius: "2px", background: "var(--text-3)" }} />
                 <span>Bajo (40%)</span>
               </div>
             </div>
@@ -338,7 +323,7 @@ export default function Tech() {
                 category={cat}
                 technologies={technologies[cat.key]}
                 index={ci}
-                inView={inView }
+                inView={inView}
               />
             ))}
           </div>
@@ -351,8 +336,8 @@ export default function Tech() {
               background: "var(--surface)",
               border: "1px solid var(--border)",
               borderRadius: "var(--radius-lg)",
-              opacity: inView  ? 1 : 0,
-              transform: inView  ? "none" : "translateY(20px)",
+              opacity: inView ? 1 : 0,
+              transform: inView ? "none" : "translateY(20px)",
               transition: "all 0.7s ease 0.4s",
             }}
           >
