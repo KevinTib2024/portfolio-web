@@ -303,3 +303,15 @@ export const experience = [
   },
 ];
 
+export const certifications = [
+  {
+    id: "az900",
+    title: "Microsoft Certified: Azure Fundamentals",
+    issuer: "Microsoft",
+    date: "Junio 2026",
+    credentialId: "8F69503172D2D5D7",
+    image: "/images/certifications/CertifiedAzureAZ900.png",
+    color: "#0078D4",
+    verify: "https://learn.microsoft.com/api/credentials/share/en-us/KEVINALEXANDER-9506/8F69503172D2D5D7?sharingId=C5824D2034B57A6B",
+  },
+];
